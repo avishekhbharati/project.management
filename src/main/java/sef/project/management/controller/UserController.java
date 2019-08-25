@@ -14,7 +14,6 @@ import sef.project.management.entity.User;
 import sef.project.management.service.UserService;
 
 @Controller
-@ResponseBody
 @RequestMapping(path = "/user")
 public class UserController {
 
@@ -22,12 +21,12 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping(path = "/list")
-	public List<User> getAllUsers() {
+	public @ResponseBody List<User> getAllUsers() {
 		return userService.getAllUsers();
 	}
 
 	@GetMapping(path = "/save")
-	public User addNewUser(@RequestParam String name, @RequestParam String email) {
+	public @ResponseBody User addNewUser(@RequestParam String name, @RequestParam String email) {
 		return userService.addNewUser(name, email);
 	}
 

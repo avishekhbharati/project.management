@@ -1,19 +1,44 @@
 package sef.project.management.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class User {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+@Table(name = "USER")
+public class User implements Serializable {
 
-    private String name;
+	private static final long serialVersionUID = 1L;
 
-    private String email;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "USER_ID", nullable = false)
+	private Integer id;
+
+	@Column(name = "USERNAME", nullable = false)
+	private String userName;
+
+	@Column(name = "EMAIL_ID", nullable = false)
+	private String email;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ContractorDetails> contractorDetails = new ArrayList<ContractorDetails>();
+
+	public ContractorDetails addContractorDetails(ContractorDetails contractorDetails) {
+		contractorDetails.setUser(this);
+		getContractorDetails().add(contractorDetails);
+		return contractorDetails;
+	}
 
 	public Integer getId() {
 		return id;
@@ -23,12 +48,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getEmail() {
@@ -39,5 +64,16 @@ public class User {
 		this.email = email;
 	}
 
+	public List<ContractorDetails> getContractorDetails() {
+		return contractorDetails;
+	}
+
+	public void setContractorDetails(List<ContractorDetails> contractorDetails) {
+		this.contractorDetails = contractorDetails;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 }
