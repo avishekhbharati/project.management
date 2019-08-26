@@ -18,7 +18,18 @@ public class ContractorService {
 		return contractorDetailsRepository.getContractorDetails(name);
 	}
 
-	public String sampleTest() {
-		return "Test";
+	public ContractorDetails createContractor(Integer weeks, Integer rate) {
+		ContractorDetails contractor = new ContractorDetails();
+		contractor.setRate(rate);
+		contractor.setWeeks(weeks);
+		return contractor;
+	}
+
+	public List<ContractorDetails> addContractor(List<ContractorDetails> contractorDetailsList,
+			ContractorDetails contractorDetails) {
+		if (contractorDetailsList.size() > 0) {
+			contractorDetailsList.add(contractorDetails);
+		}
+		return contractorDetailsList;
 	}
 }
