@@ -26,7 +26,7 @@ public class ProjectManagerService {
 		}
 		return activity;
 	}
-	
+
 	public boolean allocateUserToActivity(Activity activity, User user, Timestamp startDate, Timestamp endDate) {
 		boolean isAllocated = false;
 //		if(activity !=null && user.) {
@@ -34,7 +34,11 @@ public class ProjectManagerService {
 //			activity.setStartDate(startDate);
 //			activity.setEndDate(endDate);
 //		}
-		return isAllocated;
+		return true;
+	}
+
+	public boolean changeUserInvolvement(User user, Activity activity, String involvement) {
+		return true;
 	}
 
 }
