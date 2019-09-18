@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 import org.springframework.stereotype.Service;
 
-import sef.project.management.entity.Activity;
+import sef.project.management.dto.Activity;
 import sef.project.management.entity.User;
 
 @Service
@@ -29,11 +29,6 @@ public class ProjectManagerService {
 
 	public boolean allocateUserToActivity(Activity activity, User user, Timestamp startDate, Timestamp endDate) {
 		boolean isAllocated = false;
-//		if(activity !=null && user.) {
-//			activity.setUser(user);
-//			activity.setStartDate(startDate);
-//			activity.setEndDate(endDate);
-//		}
 		return true;
 	}
 

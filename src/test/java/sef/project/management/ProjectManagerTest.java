@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import sef.project.management.entity.Activity;
+import sef.project.management.dto.Activity;
 import sef.project.management.entity.User;
 import sef.project.management.service.ProjectManagerService;
 
