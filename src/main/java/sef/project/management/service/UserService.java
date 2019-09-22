@@ -78,7 +78,7 @@ public class UserService {
 		
 		User user = userOpt.get();
 		user.setEmail(email);
-		user.setRole(userName);
+		user.setUserName(userName);
 		user.setRole(role);					
 		return userRepository.save(user);
 	}	

@@ -27,7 +27,7 @@ public class UserController {
 	private UserService userService;
 	
 	
-	@CrossOrigin(origins = "http://localhost:9080")
+	//@CrossOrigin(origins = "http://localhost:9080")
 	@GetMapping(path = "/list")
 	public @ResponseBody List<User> getAllUsers() {
 		return userService.getAllUsers();

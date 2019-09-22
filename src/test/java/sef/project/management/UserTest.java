@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javassist.NotFoundException;
 import sef.project.management.entity.User;
 import sef.project.management.service.UserService;
 
@@ -28,34 +29,92 @@ public class UserTest {
 	private static  ArrayList<User> users ;
 	
 	@Before
-	public static void testInit() {
+	public void testInit() {
 		users = new ArrayList<User>();		
 	}
 	
 	@After
-	public static void cleanUp() {
+	public void cleanUp() {
 	
 	}	
 	
 	@Test
 	public void createUserTest() {
-		userService.addUser("HarryTest123", "emailtest@test.com", User.ROLE_PROJECTMANAGER);
-		userService.addUser("BobTest123", "emailtest@test.com", User.ROLE_EMPLOYEE);		
-		int count = userService.getUsersCount();
-		assertEquals(2 , count);			
+		try {
+			
+			int initialCount = userService.getAllUsers().size();
+			
+			User u = new User();
+			u.setUserName("HarryTest123");
+			u.setEmail("emailtest@test.com");
+			u.setRole(User.ROLE_PROJECTMANAGER);
+			
+			userService.addNewUser(u);			
+			int finalCount = userService.getAllUsers().size();
+			
+			users.add(u);	//adding to delete later.
+
+			assertEquals(initialCount + 1, finalCount, finalCount - initialCount);			
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
 	@Test
 	public void deleteUserTest() {
-		User u = new User();
-		u.setEmail("xyz@email");
-		u.setUserName("un");
-		u.setRole(User.ROLE_PROJECTMANAGER);		
-		userService.addUser(u);
-		int count1 = userService.getUsersCount();					
-		userService.removeUser(u);		
-		int count2 = userService.getUsersCount();
-		assertEquals(count1-1, count2);		
+		int initialCount = userService.getAllUsers().size();		
+		int userDelete = 0;
+		
+		for (User user : users) {
+			try {
+				userService.deleteUser(user);
+				userDelete++;
+			} catch (NotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		int finalCount = userService.getAllUsers().size();	
+		assertEquals(initialCount - userDelete, finalCount);
+	}
+	
+	
+	
+	@Test
+	public void editUserTest() {	
+		
+		try {
+			List<User> userList = userService.getAllUsers();
+			
+			if(userList.size() == 0) {
+				User u = new User();
+				u.setUserName("dummyUser123");
+				u.setEmail("dummyUser123@test.com");
+				u.setRole(User.ROLE_CONTRACTOR);
+				
+				userService.addNewUser(u);	
+				userList = userService.getAllUsers();
+			}
+			
+			User userOrg = userList.get(0);
+			int id = userOrg.getId();
+			String username = userOrg.getUserName();
+			String email = userOrg.getEmail();
+			String role = userOrg.getRole();
+			
+			
+			//edit user
+			String editedUn = "editedUsername";
+			String editedEmail = "userEdited@gmail.com";			
+			User editedUser = userService.editUser(id, editedUn, editedEmail, role);
+			
+			assertNotEquals(username, editedUser.getUserName());
+			assertNotEquals(email, editedUser.getEmail());
+			
+			//reset
+			userService.editUser(id, username, email, role);		
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
