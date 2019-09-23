@@ -2,12 +2,12 @@ package sef.project.management.dto;
 
 import java.util.List;
 
-public class Project {
+public class ProjectDTO {
 
 	private Integer projecctId;
 	private String projectName;
-	private ProjectManager allocatedBy;
-	private List<Activity> projectActivities;
+	private ProjectManagerDTO allocatedBy;
+	private List<ActivityDTO> projectActivities;
 	
 	public Integer getProjecctId() {
 		return projecctId;
@@ -21,16 +21,16 @@ public class Project {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-	public ProjectManager getAllocatedBy() {
+	public ProjectManagerDTO getAllocatedBy() {
 		return allocatedBy;
 	}
-	public void setAllocatedBy(ProjectManager allocatedBy) {
+	public void setAllocatedBy(ProjectManagerDTO allocatedBy) {
 		this.allocatedBy = allocatedBy;
 	}
-	public List<Activity> getProjectActivities() {
+	public List<ActivityDTO> getProjectActivities() {
 		return projectActivities;
 	}
-	public void setProjectActivities(List<Activity> projectActivities) {
+	public void setProjectActivities(List<ActivityDTO> projectActivities) {
 		this.projectActivities = projectActivities;
 	}
 }

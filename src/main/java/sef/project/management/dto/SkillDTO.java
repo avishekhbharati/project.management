@@ -1,6 +1,6 @@
 package sef.project.management.dto;
 
-public class Skill {
+public class SkillDTO {
 
 	private Integer skillId;
 	private String skillName;

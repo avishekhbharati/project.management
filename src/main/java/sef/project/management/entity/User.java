@@ -17,9 +17,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USER")
 public class User implements Serializable {
-
 	private static final long serialVersionUID = 1L;
-
+	
+	public static final String ROLE_CONTRACTOR = "CONTRACTOR";
+	public static final String ROLE_EMPLOYEE = "EMPLOYEE";
+	public static final String ROLE_PROJECTMANAGER = "PROJECTMANAGER";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID", nullable = false)
@@ -30,7 +33,11 @@ public class User implements Serializable {
 
 	@Column(name = "EMAIL_ID", nullable = false)
 	private String email;
-
+	
+	@Column(name = "ROLE", nullable = false)
+	private String role;
+	
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ContractorDetails> contractorDetails = new ArrayList<ContractorDetails>();
 
@@ -63,7 +70,15 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getRole() {
+		return role;
+	}
 
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	public List<ContractorDetails> getContractorDetails() {
 		return contractorDetails;
 	}
@@ -75,5 +90,4 @@ public class User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 }

@@ -1,9 +1,9 @@
 package sef.project.management.dto;
 
-public class ActivitySkill {
+public class ActivitySkillDTO {
 
 	private Integer skillLevelRequired;
-	private Skill skill;
+	private SkillDTO skill;
 
 	public Integer getSkillLevelRequired() {
 		return skillLevelRequired;
@@ -13,11 +13,11 @@ public class ActivitySkill {
 		this.skillLevelRequired = skillLevelRequired;
 	}
 
-	public Skill getSkill() {
+	public SkillDTO getSkill() {
 		return skill;
 	}
 
-	public void setSkill(Skill skill) {
+	public void setSkill(SkillDTO skill) {
 		this.skill = skill;
 	}
 

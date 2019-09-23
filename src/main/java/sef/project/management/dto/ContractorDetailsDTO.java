@@ -1,6 +1,6 @@
 package sef.project.management.dto;
 
-public class ContractorDetails {
+public class ContractorDetailsDTO {
 
 	private Integer weeks;
 	private Integer rate;

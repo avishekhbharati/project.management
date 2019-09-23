@@ -4,13 +4,13 @@ import java.sql.Timestamp;
 
 import org.springframework.stereotype.Service;
 
-import sef.project.management.dto.Activity;
+import sef.project.management.dto.ActivityDTO;
 import sef.project.management.entity.User;
 
 @Service
 public class ProjectManagerService {
 
-	public Activity scheduleActivity(Activity activity, Timestamp startDate, Timestamp endDate) {
+	public ActivityDTO scheduleActivity(ActivityDTO activity, Timestamp startDate, Timestamp endDate) {
 		if (activity != null && startDate != null && endDate != null) {
 			if (endDate.getTime() > startDate.getTime()) {
 				activity.setStartDate(startDate);
@@ -20,19 +20,19 @@ public class ProjectManagerService {
 		return activity;
 	}
 
-	public Activity setActivityDependency(Activity activity, Integer dependencyActivityId) {
+	public ActivityDTO setActivityDependency(ActivityDTO activity, Integer dependencyActivityId) {
 		if (activity != null && activity.getActivityId() != dependencyActivityId) {
 			activity.setDependencyActivityId(dependencyActivityId);
 		}
 		return activity;
 	}
 
-	public boolean allocateUserToActivity(Activity activity, User user, Timestamp startDate, Timestamp endDate) {
+	public boolean allocateUserToActivity(ActivityDTO activity, User user, Timestamp startDate, Timestamp endDate) {
 		boolean isAllocated = false;
 		return true;
 	}
 
-	public boolean changeUserInvolvement(User user, Activity activity, String involvement) {
+	public boolean changeUserInvolvement(User user, ActivityDTO activity, String involvement) {
 		return true;
 	}
 

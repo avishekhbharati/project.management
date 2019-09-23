@@ -3,7 +3,7 @@ package sef.project.management.dto;
 import java.sql.Timestamp;
 import java.util.List;
 
-public class Activity {
+public class ActivityDTO {
 
 	private Integer activityId;
 	private String activityName;
@@ -11,7 +11,7 @@ public class Activity {
 	private Integer dependencyActivityId;
 	private Timestamp startDate;
 	private Timestamp endDate;
-	private List<ActivitySkill> requiredSkills;
+	private List<ActivitySkillDTO> requiredSkills;
 	
 	public Integer getActivityId() {
 		return activityId;
@@ -49,10 +49,10 @@ public class Activity {
 	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
-	public List<ActivitySkill> getRequiredSkills() {
+	public List<ActivitySkillDTO> getRequiredSkills() {
 		return requiredSkills;
 	}
-	public void setRequiredSkills(List<ActivitySkill> requiredSkills) {
+	public void setRequiredSkills(List<ActivitySkillDTO> requiredSkills) {
 		this.requiredSkills = requiredSkills;
 	} 
 	

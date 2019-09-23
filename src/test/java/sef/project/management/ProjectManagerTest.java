@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import sef.project.management.dto.Activity;
+import sef.project.management.dto.ActivityDTO;
 import sef.project.management.entity.User;
 import sef.project.management.service.ProjectManagerService;
 
@@ -20,7 +20,7 @@ import sef.project.management.service.ProjectManagerService;
 @SpringBootTest
 public class ProjectManagerTest {
 
-	private static Activity activity;
+	private static ActivityDTO activity;
 	private static User user;
 
 	@Autowired
@@ -28,14 +28,14 @@ public class ProjectManagerTest {
 
 	@BeforeClass
 	public static void setValues() {
-		activity = new Activity();
+		activity = new ActivityDTO();
 		activity.setActivityId(100);
 		user = new User();
 	}
 
 	@Test
 	public void testScheduleActivity() {
-		Activity activity = projectManagerService.scheduleActivity(ProjectManagerTest.activity, new Timestamp(100),
+		ActivityDTO activity = projectManagerService.scheduleActivity(ProjectManagerTest.activity, new Timestamp(100),
 				new Timestamp(200));
 		long actualValue = activity.getStartDate().getTime();
 		long expectedValue = 100;
@@ -44,7 +44,7 @@ public class ProjectManagerTest {
 
 	@Test
 	public void testDependencyAllocation() {
-		Activity activity = projectManagerService.setActivityDependency(ProjectManagerTest.activity, 101);
+		ActivityDTO activity = projectManagerService.setActivityDependency(ProjectManagerTest.activity, 101);
 		int expectedDpendencyId = activity.getDependencyActivityId();
 		long expectedValue = 101;
 		assertEquals(expectedDpendencyId, expectedValue);

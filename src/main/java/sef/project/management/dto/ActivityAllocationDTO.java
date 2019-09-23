@@ -2,17 +2,17 @@ package sef.project.management.dto;
 
 import java.sql.Timestamp;
 
-public class ActivityAllocation {
+public class ActivityAllocationDTO {
 
-	private Activity allocatedActivity;
+	private ActivityDTO allocatedActivity;
 	private Integer involvementRate;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	
-	public Activity getAllocatedActivity() {
+	public ActivityDTO getAllocatedActivity() {
 		return allocatedActivity;
 	}
-	public void setAllocatedActivity(Activity allocatedActivity) {
+	public void setAllocatedActivity(ActivityDTO allocatedActivity) {
 		this.allocatedActivity = allocatedActivity;
 	}
 	public Integer getInvolvementRate() {

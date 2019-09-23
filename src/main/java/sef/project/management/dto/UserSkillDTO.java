@@ -1,15 +1,15 @@
 package sef.project.management.dto;
 
-public class UserSkill {
+public class UserSkillDTO {
 
-	private Skill skill;
+	private SkillDTO skill;
 	private Integer skillLevel;
 
-	public Skill getSkill() {
+	public SkillDTO getSkill() {
 		return skill;
 	}
 
-	public void setSkill(Skill skill) {
+	public void setSkill(SkillDTO skill) {
 		this.skill = skill;
 	}
 
