@@ -9,7 +9,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import sef.project.management.dto.UserDTO;
+import sef.project.management.constants.Constants;
+import sef.project.management.dto.ContractorDTO;
+import sef.project.management.dto.FullTimeDeveloperDTO;
+import sef.project.management.dto.ProjectManagerDTO;
 import sef.project.management.entity.User;
 import sef.project.management.service.UserService;
 
@@ -34,8 +37,16 @@ public class ModelConfiguration {
 		List<User> users = userService.getAllUsers();
 		for(User u: users) {
 			// Map user entity to user DTO
-			UserDTO user = modelMapper.map(u, UserDTO.class);
-			projectManagement.getUsers().add(user);
+			if(u.getRole().equals(Constants.ROLE_CONTRACTOR)) {
+				ContractorDTO user = modelMapper.map(u, ContractorDTO.class);
+				projectManagement.getUsers().add(user);
+			} else if(u.getRole().equals(Constants.ROLE_FULL_TIME_DEVELOPER)) {
+				FullTimeDeveloperDTO user = modelMapper.map(u, FullTimeDeveloperDTO.class);
+				projectManagement.getUsers().add(user);
+			} else if(u.getRole().equals(Constants.ROLE_PROJECT_MANAGER)) {
+				ProjectManagerDTO user = modelMapper.map(u, ProjectManagerDTO.class);
+				projectManagement.getUsers().add(user);
+			}
 		}
 		
         return projectManagement;

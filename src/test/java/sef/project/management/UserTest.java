@@ -1,21 +1,21 @@
 package sef.project.management;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javassist.NotFoundException;
+import sef.project.management.constants.Constants;
 import sef.project.management.entity.User;
 import sef.project.management.service.UserService;
 
@@ -47,7 +47,7 @@ public class UserTest {
 			User u = new User();
 			u.setUserName("HarryTest123");
 			u.setEmail("emailtest@test.com");
-			u.setRole(User.ROLE_PROJECTMANAGER);
+			u.setRole(Constants.ROLE_PROJECT_MANAGER);
 			
 			userService.addNewUser(u);			
 			int finalCount = userService.getAllUsers().size();
@@ -90,7 +90,7 @@ public class UserTest {
 				User u = new User();
 				u.setUserName("dummyUser123");
 				u.setEmail("dummyUser123@test.com");
-				u.setRole(User.ROLE_CONTRACTOR);
+				u.setRole(Constants.ROLE_CONTRACTOR);
 				
 				userService.addNewUser(u);	
 				userList = userService.getAllUsers();

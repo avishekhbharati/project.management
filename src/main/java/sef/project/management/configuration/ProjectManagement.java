@@ -10,7 +10,6 @@ import sef.project.management.dto.UserDTO;
 public class ProjectManagement {
 
 	private List<UserDTO> users = new ArrayList<UserDTO>();
-	private List<ProjectDTO> projects = new ArrayList<ProjectDTO>();
 	private List<SkillDTO> skills = new ArrayList<SkillDTO>();
 	
 	public List<UserDTO> getUsers() {
@@ -18,12 +17,6 @@ public class ProjectManagement {
 	}
 	public void setUsers(List<UserDTO> users) {
 		this.users = users;
-	}
-	public List<ProjectDTO> getProjects() {
-		return projects;
-	}
-	public void setProjects(List<ProjectDTO> projects) {
-		this.projects = projects;
 	}
 	public List<SkillDTO> getSkills() {
 		return skills;

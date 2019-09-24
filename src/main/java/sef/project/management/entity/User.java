@@ -14,15 +14,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "USER")
 public class User implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	public static final String ROLE_CONTRACTOR = "CONTRACTOR";
-	public static final String ROLE_EMPLOYEE = "EMPLOYEE";
-	public static final String ROLE_PROJECTMANAGER = "PROJECTMANAGER";
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "USER_ID", nullable = false)
@@ -33,18 +33,38 @@ public class User implements Serializable {
 
 	@Column(name = "EMAIL_ID", nullable = false)
 	private String email;
-	
+
 	@Column(name = "ROLE", nullable = false)
 	private String role;
-	
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<ContractorDetails> contractorDetails = new ArrayList<ContractorDetails>();
 
 	public ContractorDetails addContractorDetails(ContractorDetails contractorDetails) {
 		contractorDetails.setUser(this);
 		getContractorDetails().add(contractorDetails);
 		return contractorDetails;
+	}
+
+	@OneToMany(mappedBy = "allocatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Project> projectsManaged = new ArrayList<Project>();
+
+	public Project addProjectManaged(Project project) {
+		project.setAllocatedBy(this);
+		getProjectsManaged().add(project);
+		return project;
+	}
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<UserSkill> userSkills = new ArrayList<UserSkill>();
+
+	public UserSkill addUserSkill(UserSkill userSkill) {
+		userSkill.setUser(this);
+		getUserSkills().add(userSkill);
+		return userSkill;
 	}
 
 	public Integer getId() {
@@ -70,7 +90,7 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getRole() {
 		return role;
 	}
@@ -78,7 +98,7 @@ public class User implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+
 	public List<ContractorDetails> getContractorDetails() {
 		return contractorDetails;
 	}
@@ -87,7 +107,20 @@ public class User implements Serializable {
 		this.contractorDetails = contractorDetails;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Project> getProjectsManaged() {
+		return projectsManaged;
 	}
+
+	public void setProjectsManaged(List<Project> projectsManaged) {
+		this.projectsManaged = projectsManaged;
+	}
+
+	public List<UserSkill> getUserSkills() {
+		return userSkills;
+	}
+
+	public void setUserSkills(List<UserSkill> userSkills) {
+		this.userSkills = userSkills;
+	}
+
 }

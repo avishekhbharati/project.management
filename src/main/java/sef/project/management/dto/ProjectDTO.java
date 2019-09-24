@@ -4,28 +4,21 @@ import java.util.List;
 
 public class ProjectDTO {
 
-	private Integer projecctId;
+	private Integer projectId;
 	private String projectName;
-	private ProjectManagerDTO allocatedBy;
 	private List<ActivityDTO> projectActivities;
 	
-	public Integer getProjecctId() {
-		return projecctId;
+	public Integer getProjectId() {
+		return projectId;
 	}
-	public void setProjecctId(Integer projecctId) {
-		this.projecctId = projecctId;
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
 	}
 	public String getProjectName() {
 		return projectName;
 	}
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}
-	public ProjectManagerDTO getAllocatedBy() {
-		return allocatedBy;
-	}
-	public void setAllocatedBy(ProjectManagerDTO allocatedBy) {
-		this.allocatedBy = allocatedBy;
 	}
 	public List<ActivityDTO> getProjectActivities() {
 		return projectActivities;
