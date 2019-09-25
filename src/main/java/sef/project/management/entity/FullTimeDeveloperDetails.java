@@ -1,6 +1,5 @@
 package sef.project.management.entity;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @IdClass(FullTimeDeveloperDetails.class)
-@Table(name = "FULLTIMEDEVELOPER_DETAILS")
+@Table(name = "FULL_TIME_DEVELOPER_DETAILS")
 public class FullTimeDeveloperDetails implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,32 +24,35 @@ public class FullTimeDeveloperDetails implements Serializable {
 	private User user;
 
 	@Id
-	@Column(name = "BLOCKED_WEEKS", nullable = false)
-	private Integer blockedweeks;
+	@Column(name = "BLOCKED_WEEK", nullable = false)
+	private Integer blockedWeek;
 
 	@Id
-	@Column(name = "SKILLS", nullable = false)
-	private String skills;
+	@Column(name = "BLOCK_TYPE", nullable = false)
+	private Integer blockType;
+
+	public User getUser() {
+		return user;
+	}
 
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public Integer getBlockedWeeks() {
-		return blockedweeks;
+	public Integer getBlockedWeek() {
+		return blockedWeek;
 	}
 
-	public void setBlockedWeeks(Integer blockedweeks) {
-		this.blockedweeks = blockedweeks;
+	public void setBlockedWeek(Integer blockedWeek) {
+		this.blockedWeek = blockedWeek;
 	}
- 
-	public String getSkills() {
-		return skills;
+
+	public Integer getBlockType() {
+		return blockType;
 	}
-	
-	public void setSkills(String skills)
-	{
-		this.skills=skills;
+
+	public void setBlockType(Integer blockType) {
+		this.blockType = blockType;
 	}
 
 }

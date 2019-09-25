@@ -22,8 +22,7 @@ public class FullTimeDeveloperService {
 
 	public FullTimeDeveloperDetails createFullTimeDeveloper(Integer weeks, String skills) {
 		FullTimeDeveloperDetails developer = new FullTimeDeveloperDetails();
-		developer.setBlockedWeeks(weeks);
-		developer.setSkills(skills);
+		developer.setBlockedWeek(weeks);
 		return developer;
 	}
 

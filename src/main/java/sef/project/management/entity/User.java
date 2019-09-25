@@ -47,6 +47,16 @@ public class User implements Serializable {
 		return contractorDetails;
 	}
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<FullTimeDeveloperDetails> fullTimeDeveloperDetails = new ArrayList<FullTimeDeveloperDetails>();
+	
+	public FullTimeDeveloperDetails addFullTimeDeveloperDetails(FullTimeDeveloperDetails fullTimeDeveloperDetails) {
+		fullTimeDeveloperDetails.setUser(this);
+		getFullTimeDeveloperDetails().add(fullTimeDeveloperDetails);
+		return fullTimeDeveloperDetails;
+	}
+
 	@OneToMany(mappedBy = "allocatedBy", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Project> projectsManaged = new ArrayList<Project>();
@@ -56,7 +66,7 @@ public class User implements Serializable {
 		getProjectsManaged().add(project);
 		return project;
 	}
-
+	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<UserSkill> userSkills = new ArrayList<UserSkill>();
@@ -115,6 +125,14 @@ public class User implements Serializable {
 
 	public void setContractorDetails(List<ContractorDetails> contractorDetails) {
 		this.contractorDetails = contractorDetails;
+	}
+
+	public List<FullTimeDeveloperDetails> getFullTimeDeveloperDetails() {
+		return fullTimeDeveloperDetails;
+	}
+
+	public void setFullTimeDeveloperDetails(List<FullTimeDeveloperDetails> fullTimeDeveloperDetails) {
+		this.fullTimeDeveloperDetails = fullTimeDeveloperDetails;
 	}
 
 	public List<Project> getProjectsManaged() {

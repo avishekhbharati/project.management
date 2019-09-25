@@ -27,23 +27,20 @@ public class FullTimeDeveloperTest {
 	@BeforeClass
 	public static void setFullTimeDeveloper() {
 		FullTimeDeveloperDetails FullTimeDeveloper = new FullTimeDeveloperDetails();
-		FullTimeDeveloper.setBlockedWeeks(15);
-		FullTimeDeveloper.setSkills("java");
+		FullTimeDeveloper.setBlockedWeek(15);
 		FullTimeDeveloperDetailsList.add(FullTimeDeveloper);
 	}
 
 	@Test
 	public void testCreateFullTimeDeveloper() {
 		FullTimeDeveloperDetails FullTimeDeveloper = FullTimeDeveloperService.createFullTimeDeveloper(30, "c++");
-		assertEquals(FullTimeDeveloper.getBlockedWeeks().toString(), "30");
-		assertEquals(FullTimeDeveloper.getSkills().toString(), "c++");
+		assertEquals(FullTimeDeveloper.getBlockedWeek().toString(), "30");
 	}
 
 	@Test
 	public void testAddFullTimeDeveloperDetails() {
 		FullTimeDeveloperDetails FullTimeDeveloperDetails = new FullTimeDeveloperDetails();
-		FullTimeDeveloperDetails.setBlockedWeeks(15);
-		FullTimeDeveloperDetails.setSkills("java");
+		FullTimeDeveloperDetails.setBlockedWeek(15);
 		List<FullTimeDeveloperDetails> FullTimeDeveloperDetailsList = FullTimeDeveloperService
 				.addFullTimeDeveloper(FullTimeDeveloperTest.FullTimeDeveloperDetailsList, FullTimeDeveloperDetails);
 		assertEquals(FullTimeDeveloperDetailsList.size(), 2);

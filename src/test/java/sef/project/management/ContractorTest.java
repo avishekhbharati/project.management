@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import sef.project.management.dto.ContractorDTO;
 import sef.project.management.entity.ContractorDetails;
 import sef.project.management.service.ContractorService;
 
@@ -34,9 +35,9 @@ public class ContractorTest {
 
 	@Test
 	public void testCreateContractor() {
-		ContractorDetails contractor = contractorService.createContractor(1, 20);
-		assertEquals(contractor.getRate().toString(), "20");
-		assertEquals(contractor.getWeeks().toString(), "1");
+		ContractorDTO contractor = contractorService.createContractor(1, 20);
+		assertEquals(contractor.getContractorDetails().get(0).getRate().toString(), "20");
+		assertEquals(contractor.getContractorDetails().get(0).getWeeks().toString(), "1");
 	}
 
 	@Test
