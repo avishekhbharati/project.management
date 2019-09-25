@@ -24,6 +24,16 @@ public class UserService {
 
 	private ArrayList<User> userList = new ArrayList<User>(); // FOR TESTING.
 
+	public UserDTO login(String userName) {
+		UserDTO user = null;
+		List<UserDTO> users = projectManagementService.getProjectMangement().getUsers();
+		for (UserDTO userDTO : users) {
+			if (userDTO.getUserName().equalsIgnoreCase(userName))
+				user = userDTO;
+		}
+		return user;
+	}
+
 	public List<UserDTO> getAllUsers() {
 		return projectManagementService.getProjectMangement().getUsers();
 	}
