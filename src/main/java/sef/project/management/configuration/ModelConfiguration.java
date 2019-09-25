@@ -39,7 +39,7 @@ public class ModelConfiguration {
 
 		// Create model mapper to convert entity to DTO
 		ModelMapper modelMapper = new ModelMapper();
-		
+
 		// Get all users and add them to the model
 		List<User> users = userRepository.getUsers();
 		for (User u : users) {

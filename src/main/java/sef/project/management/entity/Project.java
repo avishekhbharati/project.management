@@ -29,10 +29,10 @@ public class Project implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PROJECT_ID", nullable = false)
 	private Integer projectId;
-	
+
 	@Column(name = "PROJECT_NAME", nullable = false)
 	private String projectName;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ALLOCATED_BY")
 	private User allocatedBy;

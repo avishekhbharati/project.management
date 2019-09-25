@@ -40,7 +40,7 @@ public class Skill implements Serializable {
 		getUserSkills().add(userSkill);
 		return userSkill;
 	}
-	
+
 	public Integer getSkillId() {
 		return skillId;
 	}

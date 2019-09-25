@@ -8,5 +8,5 @@ public class FullTimeEmployeeService {
 	public String sampleTest() {
 		return "Test";
 	}
-	
+
 }

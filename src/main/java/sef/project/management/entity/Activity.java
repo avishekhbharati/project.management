@@ -59,7 +59,7 @@ public class Activity implements Serializable {
 		getActivityAllocations().add(activityAllocation);
 		return activityAllocation;
 	}
-	
+
 	@OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<ActivitySkill> requiredSkills = new ArrayList<ActivitySkill>();
@@ -69,7 +69,7 @@ public class Activity implements Serializable {
 		getRequiredSkills().add(activitySkill);
 		return activitySkill;
 	}
-	
+
 	public Integer getActivityId() {
 		return activityId;
 	}

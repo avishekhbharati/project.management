@@ -23,7 +23,7 @@ public class ActivityAllocation implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ACTIVITY_ID")
 	private Activity activity;
-	
+
 	@Id
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_ID")

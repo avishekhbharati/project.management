@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class ActivitySkill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ACTIVITY_ID", nullable = false)
@@ -27,7 +27,7 @@ public class ActivitySkill implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SKILL_ID", nullable = false)
 	private Skill skill;
-	
+
 	@Id
 	@Column(name = "SKILL_LEVEL", nullable = false)
 	private Integer skillLevel;

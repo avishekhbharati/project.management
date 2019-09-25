@@ -14,7 +14,7 @@ import sef.project.management.service.SkillService;
 @Controller
 @RequestMapping(path = "/skill")
 public class SkillController {
-	
+
 	@Autowired
 	private SkillService skillService;
 

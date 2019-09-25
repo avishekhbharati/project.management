@@ -11,7 +11,7 @@ public class ProjectManagementService {
 
 	@Autowired
 	private ApplicationContext context;
-	
+
 	public ProjectManagement getProjectMangement() {
 		ProjectManagement pm = context.getBean(ProjectManagement.class);
 		return pm;

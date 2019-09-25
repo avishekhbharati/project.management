@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import sef.project.management.dto.SkillDTO;
 
-
 @Service
 public class SkillService {
 

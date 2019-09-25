@@ -23,49 +23,49 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@GetMapping(path = "/list")
 	public @ResponseBody List<UserDTO> getAllUsers() {
 		return userService.getAllUsers();
 	}
-	
+
 	@PostMapping(path = "/save")
-	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email, @RequestParam String role) {
-		String response ="";
+	public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String email,
+			@RequestParam String role) {
+		String response = "";
 		try {
 			if (userService.addNewUser(name, email, role) != null) {
-				response =  "New user added";				
-			}				
+				response = "New user added";
+			}
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 			response = "Failed to add new user";
 		}
 		return response;
 	}
-	
-	
+
 	@DeleteMapping(path = "/delete")
-	public  @ResponseBody String deleteUser(@RequestParam Integer id) {
+	public @ResponseBody String deleteUser(@RequestParam Integer id) {
 		try {
 			userService.deleteUser(id);
 			return "User deleted";
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
-			 e.printStackTrace();
-			 return e.getMessage();
+			e.printStackTrace();
+			return e.getMessage();
 		}
 	}
-	
-	
+
 	@PutMapping(path = "/edit")
-	public @ResponseBody String editUser(@RequestParam Integer id, @RequestParam Optional<String> name, @RequestParam Optional<String> email, @RequestParam Optional<String> role ) {
+	public @ResponseBody String editUser(@RequestParam Integer id, @RequestParam Optional<String> name,
+			@RequestParam Optional<String> email, @RequestParam Optional<String> role) {
 		try {
 			userService.editUser(id, name.get(), email.get(), role.get());
 			return "User edited.";
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "failed to edit user. Message: "+ e.getMessage();
+			return "failed to edit user. Message: " + e.getMessage();
 		}
 	}
 }

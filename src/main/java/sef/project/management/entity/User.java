@@ -66,7 +66,7 @@ public class User implements Serializable {
 		getUserSkills().add(userSkill);
 		return userSkill;
 	}
-	
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<ActivityAllocation> activityAllocations = new ArrayList<ActivityAllocation>();
