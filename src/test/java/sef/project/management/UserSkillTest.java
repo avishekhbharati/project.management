@@ -59,7 +59,7 @@ public class UserSkillTest {
 			int expectedValue = initialValue + 1;
 			assertEquals(expectedValue, actualValue);
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -82,7 +82,7 @@ public class UserSkillTest {
 			int expectedValue = 12;
 			assertEquals(expectedValue, actualValue);
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}		
 	}
 	@Test
@@ -99,12 +99,13 @@ public class UserSkillTest {
 		int initialValue = user.getUserSkills().size();
 		UserDTO user2;
 		try {
+			// when update is not done
 			user2 = skillService.addSkill(998, userSkill);
 			int actualValue = user2.getUserSkills().size();
 			int expectedValue = initialValue;
 			assertEquals(expectedValue, actualValue);
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -128,7 +129,7 @@ public class UserSkillTest {
 			int expectedValue = 10;
 			assertEquals(expectedValue, actualValue);	
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}	
 	}
 }

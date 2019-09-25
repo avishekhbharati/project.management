@@ -34,7 +34,7 @@ public class SkillController {
 		try {
 			return skillService.addSkill(userId, userSkill);
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
@@ -44,7 +44,7 @@ public class SkillController {
 		try {
 			return skillService.updateSkillLevel(userId, newSkillLevel, userSkill);
 		} catch (NotFoundException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 			return null;
 		}
 	}
