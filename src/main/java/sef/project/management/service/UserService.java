@@ -8,19 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javassist.NotFoundException;
+import sef.project.management.dto.UserDTO;
 import sef.project.management.entity.User;
 import sef.project.management.repository.UserRepository;
 
 @Service
 public class UserService {
 
+	// TODO Remove this autowiring and get the data from the model
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private ProjectManagementService projectManagementService;
 	
 	private ArrayList<User> userList = new ArrayList<User>();  //FOR TESTING.
 
-	public List<User> getAllUsers() {
-		return userRepository.getUsers();
+	public List<UserDTO> getAllUsers() {
+		return projectManagementService.getProjectMangement().getUsers();
 	}
 	
 	

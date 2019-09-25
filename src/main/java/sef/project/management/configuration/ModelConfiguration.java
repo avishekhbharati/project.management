@@ -17,17 +17,17 @@ import sef.project.management.dto.SkillDTO;
 import sef.project.management.dto.UserDTO;
 import sef.project.management.entity.Skill;
 import sef.project.management.entity.User;
-import sef.project.management.service.SkillService;
-import sef.project.management.service.UserService;
+import sef.project.management.repository.SkillRepository;
+import sef.project.management.repository.UserRepository;
 
 @Component
 public class ModelConfiguration {
 
 	@Autowired
-	private UserService userService;
+	private UserRepository userRepository;
 
 	@Autowired
-	private SkillService skillService;
+	private SkillRepository skillRepository;
 
 	// Create a singleton project management bean for all API calls
 	@Bean
@@ -41,7 +41,7 @@ public class ModelConfiguration {
 		ModelMapper modelMapper = new ModelMapper();
 		
 		// Get all users and add them to the model
-		List<User> users = userService.getAllUsers();
+		List<User> users = userRepository.getUsers();
 		for (User u : users) {
 			UserDTO user = null;
 			// Map user entity to user DTO based on role
@@ -56,7 +56,7 @@ public class ModelConfiguration {
 		}
 
 		// Get all skills and add them to the model
-		List<Skill> skills = skillService.getAllSkills();
+		List<Skill> skills = skillRepository.getSkills();
 		for (Skill s : skills) {
 			// Map skill entity to skill DTO
 			SkillDTO user = modelMapper.map(s, SkillDTO.class);

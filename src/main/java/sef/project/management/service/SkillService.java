@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import sef.project.management.entity.Skill;
-import sef.project.management.repository.SkillRepository;
+import sef.project.management.dto.SkillDTO;
+
 
 @Service
 public class SkillService {
 
 	@Autowired
-	private SkillRepository skillRepository;
+	private ProjectManagementService projectManagementService;
 
-	public List<Skill> getAllSkills() {
-		return skillRepository.getSkills();
+	public List<SkillDTO> getAllSkills() {
+		return projectManagementService.getProjectMangement().getSkills();
 	}
 }
