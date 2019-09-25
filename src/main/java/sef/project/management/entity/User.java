@@ -66,6 +66,16 @@ public class User implements Serializable {
 		getUserSkills().add(userSkill);
 		return userSkill;
 	}
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<ActivityAllocation> activityAllocations = new ArrayList<ActivityAllocation>();
+
+	public ActivityAllocation addActivityAllocation(ActivityAllocation activityAllocation) {
+		activityAllocation.setUser(this);
+		getActivityAllocations().add(activityAllocation);
+		return activityAllocation;
+	}
 
 	public Integer getId() {
 		return id;
@@ -121,6 +131,14 @@ public class User implements Serializable {
 
 	public void setUserSkills(List<UserSkill> userSkills) {
 		this.userSkills = userSkills;
+	}
+
+	public List<ActivityAllocation> getActivityAllocations() {
+		return activityAllocations;
+	}
+
+	public void setActivityAllocations(List<ActivityAllocation> activityAllocations) {
+		this.activityAllocations = activityAllocations;
 	}
 
 }

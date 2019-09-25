@@ -2,7 +2,10 @@ package sef.project.management.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "ACTIVITY")
@@ -43,6 +50,26 @@ public class Activity implements Serializable {
 	@JoinColumn(name = "PROJECT_ID")
 	private Project project;
 
+	@OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<ActivityAllocation> activityAllocations = new ArrayList<ActivityAllocation>();
+
+	public ActivityAllocation addActivityAllocation(ActivityAllocation activityAllocation) {
+		activityAllocation.setActivity(this);
+		getActivityAllocations().add(activityAllocation);
+		return activityAllocation;
+	}
+	
+	@OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<ActivitySkill> requiredSkills = new ArrayList<ActivitySkill>();
+
+	public ActivitySkill addSkillRequired(ActivitySkill activitySkill) {
+		activitySkill.setActivity(this);
+		getRequiredSkills().add(activitySkill);
+		return activitySkill;
+	}
+	
 	public Integer getActivityId() {
 		return activityId;
 	}
@@ -97,5 +124,21 @@ public class Activity implements Serializable {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public List<ActivityAllocation> getActivityAllocations() {
+		return activityAllocations;
+	}
+
+	public void setActivityAllocations(List<ActivityAllocation> activityAllocations) {
+		this.activityAllocations = activityAllocations;
+	}
+
+	public List<ActivitySkill> getRequiredSkills() {
+		return requiredSkills;
+	}
+
+	public void setRequiredSkills(List<ActivitySkill> requiredSkills) {
+		this.requiredSkills = requiredSkills;
 	}
 }

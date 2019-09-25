@@ -3,7 +3,6 @@ package sef.project.management.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-import sef.project.management.dto.ProjectDTO;
 import sef.project.management.dto.SkillDTO;
 import sef.project.management.dto.UserDTO;
 

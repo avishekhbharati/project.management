@@ -4,16 +4,16 @@ import java.sql.Timestamp;
 
 public class ActivityAllocationDTO {
 
-	private ActivityDTO allocatedActivity;
+	private ActivityDTO activity;
 	private Integer involvementRate;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	
-	public ActivityDTO getAllocatedActivity() {
-		return allocatedActivity;
+	public ActivityDTO getActivity() {
+		return activity;
 	}
-	public void setAllocatedActivity(ActivityDTO allocatedActivity) {
-		this.allocatedActivity = allocatedActivity;
+	public void setActivity(ActivityDTO activity) {
+		this.activity = activity;
 	}
 	public Integer getInvolvementRate() {
 		return involvementRate;
