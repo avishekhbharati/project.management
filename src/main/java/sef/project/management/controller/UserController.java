@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javassist.NotFoundException;
 import sef.project.management.configuration.ProjectManagement;
 import sef.project.management.dto.UserDTO;
+import sef.project.management.service.ProjectManagementService;
 import sef.project.management.service.UserService;
 
 @Controller
@@ -27,19 +27,19 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
-	private ApplicationContext context;
+	private ProjectManagementService projectManagementService;
 	
 	@GetMapping(path = "/list")
 	public @ResponseBody List<UserDTO> getAllUsers() {
 //		return userService.getAllUsers();
-		ProjectManagement pm = context.getBean(ProjectManagement.class);
+		ProjectManagement pm = projectManagementService.getProjectMangement();
 		return pm.getUsers();
 	}
 	
 	// Remove this API once tested
 	@GetMapping(path = "/save")
 	public @ResponseBody String addTestUser() {
-		ProjectManagement pm = context.getBean(ProjectManagement.class);
+		ProjectManagement pm = projectManagementService.getProjectMangement();
 		UserDTO user = new UserDTO();
 		user.setEmail("email@email.com");
 		user.setUserName("test-user");
