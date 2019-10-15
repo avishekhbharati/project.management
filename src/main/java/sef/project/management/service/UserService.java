@@ -34,21 +34,18 @@ public class UserService {
 			return true;
 		
 		for (UserDTO user : users) {
-			if (user.getEmail().equals(email))
+			if (email.equals(user.getEmail()))
 				return false;
 		}
 		return true;
 	}
 
-	public String addNewUser(UserDTO u)  {		
+	public UserDTO addNewUser(UserDTO u)  {		
 		if (!validateUser(u.getUserName(), u.getEmail(), u.getRole()))
-			return  "User is invalid.";
-		try {
-			projectManagementService.getProjectMangement().getUsers().add(u);
-			return  "User added.";
-		}catch(Exception ex) {
-			return  "Failed to add new user. Exception: "+ex.getMessage();
-		}	
+			return  null;		
+		projectManagementService.getProjectMangement().getUsers().add(u);
+		return  u;
+			
 	}
 	
 	public String deleteUser(int userid) {

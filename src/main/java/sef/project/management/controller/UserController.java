@@ -34,7 +34,7 @@ public class UserController {
 	}
 	
 	@PostMapping(path = "/save")
-	public @ResponseBody String addNewUser(@RequestBody UserDTO user) {		
+	public @ResponseBody UserDTO addNewUser(@RequestBody UserDTO user) {		
 		return userService.addNewUser(user);
 	}
 		
