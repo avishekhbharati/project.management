@@ -45,7 +45,7 @@ public class ProjectManagerService {
 				for (ProjectDTO project : projectManager.getProjectsManaged()) {
 					if (projectId.equals(project.getProjectId())) {
 						for (ActivityDTO a : project.getProjectActivities()) {
-							if(activityId.equals(a.getActivityId())) {
+							if (activityId.equals(a.getActivityId())) {
 								activity = a;
 							}
 						}
@@ -53,7 +53,8 @@ public class ProjectManagerService {
 				}
 			}
 		}
-		if(activity==null) return null;
+		if (activity == null)
+			return null;
 		activityAllocation.setActivity(activity);
 		for (UserDTO userDto : userList) {
 			if (userId.equals(userDto.getId())) {
@@ -62,6 +63,19 @@ public class ProjectManagerService {
 			}
 		}
 		return user;
+	}
+
+	public ProjectManagerDTO createProject(Integer userId, ProjectDTO project) {
+		List<UserDTO> userList = projectManagementService.getProjectMangement().getUsers();
+		ProjectManagerDTO projectManager = null;
+		for (UserDTO userDto : userList) {
+			if (userId.equals(userDto.getId())) {
+				projectManager = (ProjectManagerDTO) userDto;
+				project.setAllocatedBy(projectManager);
+				projectManager.getProjectsManaged().add(project);
+			}
+		}
+		return projectManager;
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sef.project.management.dto.ActivityAllocationDTO;
 import sef.project.management.dto.ActivityDTO;
+import sef.project.management.dto.ProjectDTO;
 import sef.project.management.dto.ProjectManagerDTO;
 import sef.project.management.dto.UserDTO;
 import sef.project.management.service.ProjectManagerService;
@@ -27,10 +28,16 @@ public class ProjectManagerController {
 		return projectmanagerservice.addActivityToProject(userId, projectId, activity);
 	}
 
-	@PostMapping(path = "/allocateActivity")
+	@PostMapping(path = "/allocateactivity")
 	public @ResponseBody UserDTO allocateActivity(@RequestParam Integer userId, @RequestParam Integer projectId,
 			@RequestParam Integer activityId, @RequestBody ActivityAllocationDTO activityAllocation) {
 		return projectmanagerservice.allocateActivity(userId, projectId, activityId, activityAllocation);
+	}
+
+	@PostMapping(path = "/createproject")
+	public @ResponseBody ProjectManagerDTO createProject(@RequestParam Integer userId,
+			@RequestBody ProjectDTO project) {
+		return projectmanagerservice.createProject(userId, project);
 	}
 
 }
