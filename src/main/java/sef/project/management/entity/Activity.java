@@ -33,6 +33,9 @@ public class Activity implements Serializable {
 
 	@Column(name = "ACTIVITY_NAME", nullable = false)
 	private String activityName;
+	
+	@Column(name = "DAYS_REQUIRED", nullable = true)
+	private Integer daysRequired;
 
 	@Column(name = "DEPENDENCY_ACTIVITY_ID", nullable = true)
 	private Integer dependencyActivityId;
@@ -77,6 +80,14 @@ public class Activity implements Serializable {
 
 	public String getActivityName() {
 		return activityName;
+	}
+
+	public Integer getDaysRequired() {
+		return daysRequired;
+	}
+
+	public void setDaysRequired(Integer daysRequired) {
+		this.daysRequired = daysRequired;
 	}
 
 	public void setActivityName(String activityName) {

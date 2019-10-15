@@ -6,6 +6,7 @@ public class ActivityDTO {
 
 	private Integer activityId;
 	private String activityName;
+	private Integer daysRequired;
 	private Integer dependencyActivityId;
 	private Integer startWeek;
 	private Integer endWeek;
@@ -25,6 +26,14 @@ public class ActivityDTO {
 
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
+	}
+
+	public Integer getDaysRequired() {
+		return daysRequired;
+	}
+
+	public void setDaysRequired(Integer daysRequired) {
+		this.daysRequired = daysRequired;
 	}
 
 	public Integer getDependencyActivityId() {
