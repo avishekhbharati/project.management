@@ -93,7 +93,7 @@ public class UserTest {
 		u2.setEmail("emailtest11@test.com");
 		u2.setRole(Constants.ROLE_PROJECT_MANAGER);
 
-		String response = userService.addNewUser(u2);
+		UserDTO response = userService.addNewUser(u2);
 		
 		assertEquals("Expected value didn't match the actual value.", "User added.", response);
 		

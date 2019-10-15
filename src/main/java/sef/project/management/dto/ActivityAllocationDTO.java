@@ -1,13 +1,11 @@
 package sef.project.management.dto;
 
-import java.sql.Timestamp;
-
 public class ActivityAllocationDTO {
 
 	private ActivityDTO activity;
 	private Integer involvementRate;
-	private Timestamp startDate;
-	private Timestamp endDate;
+	private Integer startWeek;
+	private Integer endWeek;
 
 	public ActivityDTO getActivity() {
 		return activity;
@@ -25,19 +23,20 @@ public class ActivityAllocationDTO {
 		this.involvementRate = involvementRate;
 	}
 
-	public Timestamp getStartDate() {
-		return startDate;
+	public Integer getStartWeek() {
+		return startWeek;
 	}
 
-	public void setStartDate(Timestamp startDate) {
-		this.startDate = startDate;
+	public void setStartWeek(Integer startWeek) {
+		this.startWeek = startWeek;
 	}
 
-	public Timestamp getEndDate() {
-		return endDate;
+	public Integer getEndWeek() {
+		return endWeek;
 	}
 
-	public void setEndDate(Timestamp endDate) {
-		this.endDate = endDate;
+	public void setEndWeek(Integer endWeek) {
+		this.endWeek = endWeek;
 	}
+
 }

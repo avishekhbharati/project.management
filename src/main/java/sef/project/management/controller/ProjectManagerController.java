@@ -22,11 +22,11 @@ public class ProjectManagerController {
 
 	@Autowired
 	private ProjectManagerService projectmanagerservice;
-	
-	
+
 	@PostMapping(path = "/addactivity")
-	public @ResponseBody ProjectManagerDTO AddActivityToProject(@RequestParam Integer userId, @RequestParam Integer projectId, @RequestBody ActivityDTO activity ) {
+	public @ResponseBody ProjectManagerDTO AddActivityToProject(@RequestParam Integer userId,
+			@RequestParam Integer projectId, @RequestBody ActivityDTO activity) {
 		return projectmanagerservice.addActivityToProject(userId, projectId, activity);
 	}
-	
+
 }
