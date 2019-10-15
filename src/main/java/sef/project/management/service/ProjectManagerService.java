@@ -71,7 +71,6 @@ public class ProjectManagerService {
 		for (UserDTO userDto : userList) {
 			if (userId.equals(userDto.getId())) {
 				projectManager = (ProjectManagerDTO) userDto;
-				project.setAllocatedBy(projectManager);
 				projectManager.getProjectsManaged().add(project);
 			}
 		}

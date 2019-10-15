@@ -48,4 +48,9 @@ public class SkillController {
 			return null;
 		}
 	}
+	
+	@PostMapping(path = "/create")
+	public @ResponseBody List<SkillDTO> createSkill(@RequestBody SkillDTO skill) {
+		return skillService.createSkill(skill);
+	}
 }

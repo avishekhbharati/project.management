@@ -29,11 +29,13 @@ public class SkillService {
 				userDTO = user;
 			}
 		}
-		if(userDTO==null||userSkill==null) throw new NotFoundException("User Not Found");
+		if (userDTO == null || userSkill == null)
+			throw new NotFoundException("User Not Found");
 		return userDTO;
 	}
 
-	public UserDTO updateSkillLevel(Integer userId, Integer newSkillLevel, UserSkillDTO userSkill) throws NotFoundException {
+	public UserDTO updateSkillLevel(Integer userId, Integer newSkillLevel, UserSkillDTO userSkill)
+			throws NotFoundException {
 		UserDTO userDTO = null;
 		List<UserDTO> users = projectManagementService.getProjectMangement().getUsers();
 		for (UserDTO user : users) {
@@ -46,7 +48,14 @@ public class SkillService {
 				}
 			}
 		}
-		if(userDTO==null) throw new NotFoundException("Skill for the User Not Found");
+		if (userDTO == null)
+			throw new NotFoundException("Skill for the User Not Found");
 		return userDTO;
+	}
+
+	public List<SkillDTO> createSkill(SkillDTO skill) {
+		List<SkillDTO> skills = getAllSkills();
+		skills.add(skill);
+		return skills;
 	}
 }
