@@ -39,83 +39,68 @@ public class UserService {
 	}
 
 	public boolean validateUser(String name, String email, String role) {
-		Iterable<User> users = userRepository.findAll();
-		for (User user : users) {
+		List<UserDTO> users = projectManagementService.getProjectMangement().getUsers();
+		
+		if(users.isEmpty())
+			return true;
+		
+		for (UserDTO user : users) {
 			if (user.getEmail().equals(email))
 				return false;
 		}
 		return true;
 	}
 
-	public User addNewUser(String name, String email, String role) throws NotFoundException {
-		if (!validateUser(name, email, role))
-			throw new NotFoundException("User is invalid.");
-
-		User user = createUser(name, email, role);
-		return userRepository.save(user);
-	}
-
-	public User addNewUser(User u) throws NotFoundException {
+	public String addNewUser(UserDTO u)  {		
 		if (!validateUser(u.getUserName(), u.getEmail(), u.getRole()))
-			throw new NotFoundException("User is invalid.");
-		return userRepository.save(u);
+			return  "User is invalid.";
+		try {
+			projectManagementService.getProjectMangement().getUsers().add(u);
+			return  "User added.";
+		}catch(Exception ex) {
+			return  "Failed to add new user. Exception: "+ex.getMessage();
+		}	
+	}
+	
+	public String deleteUser(int userid) {
+		List<UserDTO> userList = projectManagementService.getProjectMangement().getUsers();
+				
+		UserDTO userTodel = null;
+		for (UserDTO userDto : userList) {
+			if (userDto.getId().equals(userid)) {
+				userTodel = userDto;
+				break;
+			}			
+		}		
+
+		if (userTodel == null)
+			return "User with id: "+ userid +" is not in db.";
+		
+		int userToDelIndex = userList.indexOf(userTodel);
+
+		projectManagementService.getProjectMangement().getUsers().remove(userToDelIndex);
+		return "User deleted.";
 	}
 
-	public void deleteUser(User user) throws NotFoundException {
-		Optional<User> userOpt = userRepository.findById(user.getId());
-
-		if (!userOpt.isPresent()) {
-			throw new NotFoundException("User with id: " + user.getId() + " is not in db.");
+	public String editUser(UserDTO user) {
+		//get all users;
+		List<UserDTO> userList =  projectManagementService.getProjectMangement().getUsers();
+		
+		UserDTO userToEdit = null;
+		for (UserDTO userDto : userList) {
+			if (userDto.getId().equals(user.getId())) {
+				userToEdit = userDto;
+				break;
+			}			
+		}
+		
+		if (userToEdit == null) {
+			return "User with id: " + user.getId() + " is not in db.";
 		}
 
-		userRepository.delete(user);
-	}
-
-	public void deleteUser(Integer id) throws NotFoundException {
-		Optional<User> userOpt = userRepository.findById(id);
-
-		if (!userOpt.isPresent()) {
-			throw new NotFoundException("User with id: " + id + " is not in db.");
-		}
-		userRepository.deleteById(id);
-	}
-
-	public User editUser(Integer id, String userName, String email, String role) throws NotFoundException {
-		Optional<User> userOpt = userRepository.findById(id);
-		if (!userOpt.isPresent()) {
-			throw new NotFoundException("User with id: " + id + " is not in db.");
-		}
-
-		User user = userOpt.get();
-		user.setEmail(email);
-		user.setUserName(userName);
-		user.setRole(role);
-		return userRepository.save(user);
-	}
-
-	public User createUser(String name, String email, String role) {
-		User user = new User();
-		user.setUserName(name);
-		user.setEmail(email);
-		user.setRole(role);
-		return user;
-	}
-
-	// For Test
-	public void addUser(String name, String email, String role) {
-		User user = createUser(name, email, role);
-		userList.add(user);
-	}
-
-	public void addUser(User u) {
-		userList.add(u);
-	}
-
-	public void removeUser(User user) {
-		userList.remove(user);
-	}
-
-	public int getUsersCount() {
-		return userList.size();
-	}
+		userToEdit.setEmail(user.getEmail());
+		userToEdit.setUserName(user.getUserName());
+		userToEdit.setRole(user.getRole());
+		return "User Edited.";
+	}	
 }

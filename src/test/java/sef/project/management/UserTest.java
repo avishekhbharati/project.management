@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,100 +20,105 @@ import javassist.NotFoundException;
 import sef.project.management.constants.Constants;
 import sef.project.management.dto.UserDTO;
 import sef.project.management.entity.User;
+import sef.project.management.service.ProjectManagementService;
 import sef.project.management.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserTest {
 
+	//@Autowired
+	//private ProjectManagementService pms;
+
 	@Autowired
 	private UserService userService;
-
-	private static ArrayList<User> users;
+	
+    private static ArrayList<UserDTO> users;
 
 	@Before
 	public void testInit() {
-		users = new ArrayList<User>();
+		users = new ArrayList<UserDTO>();
 	}
 
 	@After
-	public void cleanUp() {
-
+	public  void cleanUp() {
+		
 	}
 
 	@Test
 	public void createUserTest() {
-		try {
+		int initialCount = userService.getAllUsers().size();
 
-			int initialCount = userService.getAllUsers().size();
+		UserDTO u = new UserDTO();
+		u.setId(1);
+		u.setUserName("UnTest1");
+		u.setEmail("emailtest1@test.com");
+		u.setRole(Constants.ROLE_PROJECT_MANAGER);
 
-			User u = new User();
-			u.setUserName("HarryTest123");
-			u.setEmail("emailtest@test.com");
-			u.setRole(Constants.ROLE_PROJECT_MANAGER);
+		userService.addNewUser(u);
 
-			userService.addNewUser(u);
-			int finalCount = userService.getAllUsers().size();
-
-			users.add(u); // adding to delete later.
-
-			assertEquals(initialCount + 1, finalCount, finalCount - initialCount);
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
+		int finalCount = userService.getAllUsers().size();
+		assertEquals(initialCount + 1, finalCount, finalCount - initialCount);
 	}
 
+	
 	@Test
 	public void deleteUserTest() {
-		int initialCount = userService.getAllUsers().size();
-		int userDelete = 0;
+		
+		//first add
+		UserDTO u = new UserDTO();
+		u.setId(2);
+		u.setUserName("UnTest2");
+		u.setEmail("emailtest2@test.com");
+		u.setRole(Constants.ROLE_PROJECT_MANAGER);
+		userService.addNewUser(u);
+				
+		//check count
+		int expected = userService.getAllUsers().size();
 
-		for (User user : users) {
-			try {
-				userService.deleteUser(user);
-				userDelete++;
-			} catch (NotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		int finalCount = userService.getAllUsers().size();
-		assertEquals(initialCount - userDelete, finalCount);
+		userService.deleteUser(2);
+		int actual = userService.getAllUsers().size();
+		
+		assertEquals(expected-1, actual);	
 	}
-
+	
 	@Test
-	public void editUserTest() {
+	public void createUserTestNeg() { 
+		int initialCount = userService.getAllUsers().size();
 
-		try {
-			List<UserDTO> userList = userService.getAllUsers();
+		UserDTO u = new UserDTO();
+		u.setId(3);
+		u.setUserName("UnTest11");
+		u.setEmail("emailtest11@test.com");
+		u.setRole(Constants.ROLE_PROJECT_MANAGER);
 
-			if (userList.size() == 0) {
-				User u = new User();
-				u.setUserName("dummyUser123");
-				u.setEmail("dummyUser123@test.com");
-				u.setRole(Constants.ROLE_CONTRACTOR);
+		userService.addNewUser(u);
+				
+		UserDTO u2 = new UserDTO();
+		u2.setId(4);
+		u2.setUserName("UnTest12");
+		u2.setEmail("emailtest11@test.com");
+		u2.setRole(Constants.ROLE_PROJECT_MANAGER);
 
-				userService.addNewUser(u);
-				userList = userService.getAllUsers();
-			}
-
-			UserDTO userOrg = userList.get(0);
-			int id = userOrg.getId();
-			String username = userOrg.getUserName();
-			String email = userOrg.getEmail();
-			String role = userOrg.getRole();
-
-			// edit user
-			String editedUn = "editedUsername";
-			String editedEmail = "userEdited@gmail.com";
-			User editedUser = userService.editUser(id, editedUn, editedEmail, role);
-
-			assertNotEquals(username, editedUser.getUserName());
-			assertNotEquals(email, editedUser.getEmail());
-
-			// reset
-			userService.editUser(id, username, email, role);
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
+		String response = userService.addNewUser(u2);
+		
+		assertEquals("Expected value didn't match the actual value.", "User added.", response);
+		
 	}
+	
+	@Test
+	public void deleteUserTestNeg() {		
+		//first add
+		UserDTO u = new UserDTO();
+		u.setId(5);
+		u.setUserName("InvalidUser");
+		u.setEmail("InvalidUser@test.com");
+		u.setRole(Constants.ROLE_PROJECT_MANAGER);			
+		userService.addNewUser(u);
+		
+		String response = userService.deleteUser(5);		
+		System.out.println(response);
+		assertEquals("User deleted.", response);		
+	}
+	
 }
