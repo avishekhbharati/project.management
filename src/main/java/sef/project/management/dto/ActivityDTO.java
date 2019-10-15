@@ -1,6 +1,5 @@
 package sef.project.management.dto;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class ActivityDTO {
@@ -8,8 +7,8 @@ public class ActivityDTO {
 	private Integer activityId;
 	private String activityName;
 	private Integer dependencyActivityId;
-	private Timestamp startDate;
-	private Timestamp endDate;
+	private Integer startWeek;
+	private Integer endWeek;
 	private List<ActivitySkillDTO> requiredSkills;
 
 	public Integer getActivityId() {
@@ -36,20 +35,20 @@ public class ActivityDTO {
 		this.dependencyActivityId = dependencyActivityId;
 	}
 
-	public Timestamp getStartDate() {
-		return startDate;
+	public Integer getStartWeek() {
+		return startWeek;
 	}
 
-	public void setStartDate(Timestamp startDate) {
-		this.startDate = startDate;
+	public void setStartWeek(Integer startWeek) {
+		this.startWeek = startWeek;
 	}
 
-	public Timestamp getEndDate() {
-		return endDate;
+	public Integer getEndWeek() {
+		return endWeek;
 	}
 
-	public void setEndDate(Timestamp endDate) {
-		this.endDate = endDate;
+	public void setEndWeek(Integer endWeek) {
+		this.endWeek = endWeek;
 	}
 
 	public List<ActivitySkillDTO> getRequiredSkills() {

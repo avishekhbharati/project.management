@@ -1,26 +1,19 @@
 package sef.project.management;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javassist.NotFoundException;
 import sef.project.management.constants.Constants;
 import sef.project.management.dto.UserDTO;
-import sef.project.management.entity.User;
-import sef.project.management.service.ProjectManagementService;
 import sef.project.management.service.UserService;
 
 @RunWith(SpringRunner.class)

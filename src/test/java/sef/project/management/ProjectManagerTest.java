@@ -35,10 +35,9 @@ public class ProjectManagerTest {
 
 	@Test
 	public void testScheduleActivity() {
-		ActivityDTO activity = projectManagerService.scheduleActivity(ProjectManagerTest.activity, new Timestamp(100),
-				new Timestamp(200));
-		long actualValue = activity.getStartDate().getTime();
-		long expectedValue = 100;
+		ActivityDTO activity = projectManagerService.scheduleActivity(ProjectManagerTest.activity, 1,2);
+		long actualValue = activity.getStartWeek();
+		long expectedValue = 1;
 		assertEquals(expectedValue, actualValue);
 	}
 

@@ -10,11 +10,11 @@ import sef.project.management.entity.User;
 @Service
 public class ProjectManagerService {
 
-	public ActivityDTO scheduleActivity(ActivityDTO activity, Timestamp startDate, Timestamp endDate) {
+	public ActivityDTO scheduleActivity(ActivityDTO activity, Integer startDate, Integer endDate) {
 		if (activity != null && startDate != null && endDate != null) {
-			if (endDate.getTime() > startDate.getTime()) {
-				activity.setStartDate(startDate);
-				activity.setEndDate(endDate);
+			if (endDate > startDate) {
+				activity.setStartWeek(startDate);
+				activity.setEndWeek(endDate);
 			}
 		}
 		return activity;
