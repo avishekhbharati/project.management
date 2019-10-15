@@ -41,7 +41,7 @@ public class UserSkillTest {
 	}
 
 	@Test
-	public void testAddUserSkill() {
+	public void testAddUserSkill() throws NotFoundException {
 		// Add a new User to the model
 		UserDTO user = new UserDTO();
 		user.setId(996);
@@ -50,21 +50,21 @@ public class UserSkillTest {
 		user.setUserSkills(userSkills);
 		projectManagementService.getProjectMangement().getUsers().add(user);
 
+		// check the pre condition. this user is not there
+		// also check if the object added is the correct one 
+		//by checking the value inside the object
+		
 		// Run the test case
 		int initialValue = user.getUserSkills().size();
 		UserDTO user2;
-		try {
-			user2 = skillService.addSkill(996, userSkill);
-			int actualValue = user2.getUserSkills().size();
-			int expectedValue = initialValue + 1;
-			assertEquals(expectedValue, actualValue);
-		} catch (NotFoundException e) {
-			System.out.println(e.getMessage());
-		}
+		user2 = skillService.addSkill(996, userSkill);
+		int actualValue = user2.getUserSkills().size();
+		int expectedValue = initialValue + 1;
+		assertEquals(expectedValue, actualValue);
 	}
 
 	@Test
-	public void testUpdateSkillLevel() {
+	public void testUpdateSkillLevel() throws NotFoundException {
 		// Add a new User with sills to the model
 		UserDTO user = new UserDTO();
 		user.setId(997);
@@ -76,17 +76,14 @@ public class UserSkillTest {
 
 		// Run the test case
 		UserDTO user2;
-		try {
-			user2 = skillService.updateSkillLevel(997, 12, userSkill);
-			int actualValue = user2.getUserSkills().get(0).getSkillLevel();
-			int expectedValue = 12;
-			assertEquals(expectedValue, actualValue);
-		} catch (NotFoundException e) {
-			System.out.println(e.getMessage());
-		}		
+		user2 = skillService.updateSkillLevel(997, 12, userSkill);
+		int actualValue = user2.getUserSkills().get(0).getSkillLevel();
+		int expectedValue = 12;
+		assertEquals(expectedValue, actualValue);
 	}
-	@Test
-	public void testAddUserSkillNeg() {
+
+	@Test(expected = NotFoundException.class)
+	public void testAddUserSkillNeg() throws NotFoundException {
 		// Add a new User to the model
 		UserDTO user = new UserDTO();
 		user.setId(998);
@@ -98,19 +95,15 @@ public class UserSkillTest {
 		// Run the test case
 		int initialValue = user.getUserSkills().size();
 		UserDTO user2;
-		try {
-			// when update is not done
-			user2 = skillService.addSkill(998, userSkill);
-			int actualValue = user2.getUserSkills().size();
-			int expectedValue = initialValue;
-			assertEquals(expectedValue, actualValue);
-		} catch (NotFoundException e) {
-			System.out.println(e.getMessage());
-		}
+		// when update is not done
+		user2 = skillService.addSkill(998, null);
+		int actualValue = user2.getUserSkills().size();
+		int expectedValue = initialValue;
+		assertEquals(expectedValue, actualValue);
 	}
 
-	@Test
-	public void testUpdateSkillLevelNeg() {
+	@Test(expected = NotFoundException.class)
+	public void testUpdateSkillLevelNeg() throws NotFoundException {
 		// Add a new User with sills to the model
 		UserDTO user = new UserDTO();
 		user.setId(999);
@@ -120,16 +113,12 @@ public class UserSkillTest {
 		user.setUserSkills(userSkills);
 		projectManagementService.getProjectMangement().getUsers().add(user);
 
-		// Run the test case
+		// make sure user with user id 1000 is not there
 		UserDTO user2;
-		try {
-			// user id not found
-			user2 = skillService.updateSkillLevel(1000, 12, userSkill);
-			int actualValue = user2.getUserSkills().get(0).getSkillLevel();
-			int expectedValue = 10;
-			assertEquals(expectedValue, actualValue);	
-		} catch (NotFoundException e) {
-			System.out.println(e.getMessage());
-		}	
+		// user id not found
+		user2 = skillService.updateSkillLevel(1000, 12, userSkill);
+		int actualValue = user2.getUserSkills().get(0).getSkillLevel();
+		int expectedValue = 10;
+		assertEquals(expectedValue, actualValue);
 	}
 }

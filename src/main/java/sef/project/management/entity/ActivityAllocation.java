@@ -32,11 +32,11 @@ public class ActivityAllocation implements Serializable {
 	@Column(name = "INVOLVEMENT_RATE", nullable = false)
 	private Integer involvementRate;
 
-	@Column(name = "START_DATE", nullable = true)
-	private Timestamp startDate;
+	@Column(name = "START_WEEK", nullable = true)
+	private Integer startWeek;
 
-	@Column(name = "END_DATE", nullable = true)
-	private Timestamp endDate;
+	@Column(name = "END_WEEK", nullable = true)
+	private Integer endWeek;
 
 	public Activity getActivity() {
 		return activity;
@@ -62,20 +62,20 @@ public class ActivityAllocation implements Serializable {
 		this.involvementRate = involvementRate;
 	}
 
-	public Timestamp getStartDate() {
-		return startDate;
+	public Integer getStartWeek() {
+		return startWeek;
 	}
 
-	public void setStartDate(Timestamp startDate) {
-		this.startDate = startDate;
+	public void setStartWeek(Integer startWeek) {
+		this.startWeek = startWeek;
 	}
 
-	public Timestamp getEndDate() {
-		return endDate;
+	public Integer getEndWeek() {
+		return endWeek;
 	}
 
-	public void setEndDate(Timestamp endDate) {
-		this.endDate = endDate;
+	public void setEndWeek(Integer endWeek) {
+		this.endWeek = endWeek;
 	}
 
 }

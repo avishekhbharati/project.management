@@ -29,7 +29,7 @@ public class SkillService {
 				userDTO = user;
 			}
 		}
-		if(userDTO==null) throw new NotFoundException("User Not Found");
+		if(userDTO==null||userSkill==null) throw new NotFoundException("User Not Found");
 		return userDTO;
 	}
 

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import sef.project.management.constants.Constants;
 import sef.project.management.dto.ContractorDTO;
 import sef.project.management.dto.ContractorDetailsDTO;
-import sef.project.management.dto.SkillDTO;
 import sef.project.management.dto.UserDTO;
 import sef.project.management.entity.ContractorDetails;
 
@@ -18,7 +17,7 @@ public class ContractorService {
 
 	@Autowired
 	private ProjectManagementService projectManagementService;
-	
+
 	public List<ContractorDTO> getAllContractors() {
 		List<UserDTO> users = projectManagementService.getProjectMangement().getUsers();
 		List<ContractorDTO> contractors = new ArrayList<ContractorDTO>();
@@ -37,7 +36,7 @@ public class ContractorService {
 		contractorDetails.setWeeks(weeks);
 		contractorDTO.getContractorDetails().add(contractorDetails);
 		contractorDTO.setUserName("Test");
-		//TODO set other details
+		// TODO set other details
 		projectManagementService.getProjectMangement().getUsers().add(contractorDTO);
 		return contractorDTO;
 	}
@@ -48,6 +47,22 @@ public class ContractorService {
 			contractorDetailsList.add(contractorDetails);
 		}
 		return contractorDetailsList;
+	}
+
+	// Add rate to a contractor
+	public ContractorDTO getAddRate(Integer userId, Integer weeks, Integer rate) {
+		ContractorDTO contractor = null;
+		List<UserDTO> users = this.projectManagementService.getProjectMangement().getUsers();
+		for (UserDTO user : users) {
+			if (user.getRole().equalsIgnoreCase(Constants.ROLE_CONTRACTOR) && user.getId().equals(userId)) {
+				contractor = (ContractorDTO) user;
+				ContractorDetailsDTO details = new ContractorDetailsDTO();
+				details.setRate(rate);
+				details.setWeeks(weeks);
+				contractor.getContractorDetails().add(details);
+			}
+		}
+		return contractor;
 	}
 
 }

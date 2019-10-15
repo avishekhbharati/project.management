@@ -37,14 +37,11 @@ public class Activity implements Serializable {
 	@Column(name = "DEPENDENCY_ACTIVITY_ID", nullable = true)
 	private Integer dependencyActivityId;
 
-	@Column(name = "DAYS_REQUIRED", nullable = true)
-	private Integer daysRequired;
+	@Column(name = "START_WEEK", nullable = true)
+	private Integer startWeek;
 
-	@Column(name = "START_DATE", nullable = true)
-	private Timestamp startDate;
-
-	@Column(name = "END_DATE", nullable = true)
-	private Timestamp endDate;
+	@Column(name = "END_WEEK", nullable = true)
+	private Integer endWeek;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROJECT_ID")
@@ -94,28 +91,20 @@ public class Activity implements Serializable {
 		this.dependencyActivityId = dependencyActivityId;
 	}
 
-	public Integer getDaysRequired() {
-		return daysRequired;
+	public Integer getStartWeek() {
+		return startWeek;
 	}
 
-	public void setDaysRequired(Integer daysRequired) {
-		this.daysRequired = daysRequired;
+	public void setStartWeek(Integer startWeek) {
+		this.startWeek = startWeek;
 	}
 
-	public Timestamp getStartDate() {
-		return startDate;
+	public Integer getEndWeek() {
+		return endWeek;
 	}
 
-	public void setStartDate(Timestamp startDate) {
-		this.startDate = startDate;
-	}
-
-	public Timestamp getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Timestamp endDate) {
-		this.endDate = endDate;
+	public void setEndWeek(Integer endWeek) {
+		this.endWeek = endWeek;
 	}
 
 	public Project getProject() {
