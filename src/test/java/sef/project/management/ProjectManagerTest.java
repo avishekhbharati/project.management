@@ -33,38 +33,6 @@ public class ProjectManagerTest {
 		user = new User();
 	}
 
-	@Test
-	public void testScheduleActivity() {
-		ActivityDTO activity = projectManagerService.scheduleActivity(ProjectManagerTest.activity, 1,2);
-		long actualValue = activity.getStartWeek();
-		long expectedValue = 1;
-		assertEquals(expectedValue, actualValue);
-	}
-
-	@Test
-	public void testDependencyAllocation() {
-		ActivityDTO activity = projectManagerService.setActivityDependency(ProjectManagerTest.activity, 101);
-		int expectedDpendencyId = activity.getDependencyActivityId();
-		long expectedValue = 101;
-		assertEquals(expectedDpendencyId, expectedValue);
-	}
-
-	@Test
-	public void testUserAllocation() {
-		boolean isAllocated = projectManagerService.allocateUserToActivity(ProjectManagerTest.activity,
-				ProjectManagerTest.user, new Timestamp(100), new Timestamp(200));
-		boolean expectedValue = true;
-		assertEquals(isAllocated, expectedValue);
-	}
-
-	@Test
-	public void testUserInvolvement() {
-		boolean isChanged = projectManagerService.changeUserInvolvement(ProjectManagerTest.user,
-				ProjectManagerTest.activity, "40");
-		boolean expectedValue = true;
-		assertEquals(isChanged, expectedValue);
-	}
-
 	@AfterClass
 	public static void forGarbageCollection() {
 		ProjectManagerTest.activity = null;
