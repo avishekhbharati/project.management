@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import sef.project.management.dto.ActivityAllocationDTO;
 import sef.project.management.dto.ActivityDTO;
 import sef.project.management.dto.ContractorDTO;
 import sef.project.management.entity.User;
@@ -46,6 +47,6 @@ public class ProjectManagerTest {
 		Integer projectId = 1;
 		Integer activityId = 1;
 		ActivityAllocationDTO activityAllocation = new ActivityAllocationDTO();
-		projectManagerService.allocateActivity(userId, projectId, activityId, activityAllocation)
+		projectManagerService.allocateActivity(userId, projectId, activityId, activityAllocation);
 	}
 }
