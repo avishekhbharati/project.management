@@ -36,8 +36,8 @@ public class ProjectManagerService {
 
 	public UserDTO allocateActivity(Integer userId, Integer projectId, Integer activityId,
 			ActivityAllocationDTO activityAllocation) {
+		if(!validateActivity(activityAllocation)) return new UserDTO();
 		ActivityDTO activity = null;
-		UserDTO user = null;
 		List<UserDTO> userList = projectManagementService.getProjectMangement().getUsers();
 		for (UserDTO userDto : userList) {
 			if (Constants.ROLE_PROJECT_MANAGER.equals(userDto.getRole())) {
@@ -47,6 +47,7 @@ public class ProjectManagerService {
 						for (ActivityDTO a : project.getProjectActivities()) {
 							if (activityId.equals(a.getActivityId())) {
 								activity = a;
+								activityAllocation.setActivity(activity);
 							}
 						}
 					}
@@ -55,7 +56,16 @@ public class ProjectManagerService {
 		}
 		if (activity == null)
 			return null;
-		activityAllocation.setActivity(activity);
+		return setActivityAllocation(userId, userList, activityAllocation);
+	}
+	
+	public boolean validateActivity(ActivityAllocationDTO activityAllocation) {
+		if(activityAllocation.getStartWeek()>52 || activityAllocation.getStartWeek()<1 || activityAllocation.getEndWeek()>52 || activityAllocation.getEndWeek()<1) return false;
+		else return true;
+	}
+	
+	public UserDTO setActivityAllocation(Integer userId,List<UserDTO> userList,ActivityAllocationDTO activityAllocation) {
+		UserDTO user = null;
 		for (UserDTO userDto : userList) {
 			if (userId.equals(userDto.getId())) {
 				userDto.getActivityAllocations().add(activityAllocation);

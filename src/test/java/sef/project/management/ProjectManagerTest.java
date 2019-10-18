@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import sef.project.management.dto.ActivityDTO;
+import sef.project.management.dto.ContractorDTO;
 import sef.project.management.entity.User;
 import sef.project.management.service.ProjectManagerService;
 
@@ -37,5 +38,14 @@ public class ProjectManagerTest {
 	public static void forGarbageCollection() {
 		ProjectManagerTest.activity = null;
 		ProjectManagerTest.user = null;
+	}
+	
+	@Test
+	public void testCreateContractor() {
+		Integer userId = 1;
+		Integer projectId = 1;
+		Integer activityId = 1;
+		ActivityAllocationDTO activityAllocation = new ActivityAllocationDTO();
+		projectManagerService.allocateActivity(userId, projectId, activityId, activityAllocation)
 	}
 }
